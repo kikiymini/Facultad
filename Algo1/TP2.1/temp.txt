@@ -1,0 +1,134 @@
+    int dimension = 12;
+    if (numero_nivel% 2 == 0)
+        dimension = 17;
+
+    char mapa_ocupado[dimension][dimension];
+    // Vaciar mapa por defecto
+    for (int i = 0; i < dimension; i++)
+        for (int j = 0; j < dimension; j++)
+            mapa_ocupado[i][j] = VACIO;
+
+    // Paredes
+    nivel->tope_paredes = 0;
+    obtener_paredes(numero_nivel, nivel->paredes, &nivel->tope_paredes);
+    for (int i = 0; i < nivel->tope_paredes; i++)
+    {
+        mapa_ocupado[nivel->paredes[i].fil][nivel->paredes[i].col] = OCUPADO;
+    }
+
+    // Entrada - posicion aleatoria -
+    int entrada_fil = 0;
+    int entrada_col = 0;
+    do
+    {
+        entrada_fil = rand() % dimension;
+        entrada_col = rand() % dimension;
+    } while (mapa_ocupado[entrada_fil][entrada_col] != VACIO);
+    
+    nivel->entrada.fil = entrada_fil;
+    nivel->entrada.col = entrada_col; 
+    mapa_ocupado[nivel->entrada.fil][nivel->entrada.col] = ENTRADA;
+    agregar_al_nivel(nivel, mapa_ocupado, ENTRADA, entrada_fil, entrada_col, 0);
+
+    // Salida - posicion aleatoria -
+    int salida_fil = 0;
+    int salida_col = 0;
+    do
+    {
+        salida_fil = rand() % dimension;
+        salida_col = rand() % dimension;
+    } while (mapa_ocupado[salida_fil][salida_col] != VACIO);
+
+    nivel->salida.fil = salida_fil;
+    nivel->salida.col = salida_col; 
+    mapa_ocupado[nivel->salida.fil][nivel->salida.col] = SALIDA;
+    //agregar_al_nivel(nivel, mapa_ocupado, SALIDA, salida_fil, salida_col, 0);
+
+    // OBSTACULOS
+    int cantidad_bomba = 0;
+    if (hay_bomba) cantidad_bomba++;
+    nivel->tope_obstaculos = cantidad_baldosas_pinches + cantidad_guardia + cantidad_bomba;
+
+    int obstaculos_puestos = 0;
+    while (obstaculos_puestos <= nivel->tope_obstaculos)
+    {
+        int fila = 0;
+        int columna = 0;
+        do
+        {
+            fila = rand () % dimension;
+            columna = rand () % dimension;
+        } while (mapa_ocupado[fila][columna] != VACIO);
+
+        // Baldosas pinche - posicion aleatoria y continuo - //CORREGIR
+        if (obstaculos_puestos < cantidad_baldosas_pinches)
+        {
+            for (int i = 0; i < cantidad_baldosas_pinches; i++)
+            {
+                // TODO
+            }        
+        }
+
+        // Guardias - posicion aleatoria -
+        else if(obstaculos_puestos < cantidad_baldosas_pinches + cantidad_guardia)
+        {
+            nivel->obstaculos[obstaculos_puestos].tipo = GUARDIA;
+            nivel->obstaculos[obstaculos_puestos].posicion.fil = fila;
+            nivel->obstaculos[obstaculos_puestos].posicion.col = columna; 
+            //agregar_al_nivel(nivel, mapa_ocupado, GUARDIA, fila, columna, obstaculos_puestos);                
+        }
+
+        // Bomba - posicion aleatoria -
+        else
+        {
+            nivel->obstaculos[obstaculos_puestos].tipo = BOMBA;
+            nivel->obstaculos[obstaculos_puestos].posicion.fil = fila;
+            nivel->obstaculos[obstaculos_puestos].posicion.col = columna;
+            //agregar_al_nivel(nivel, mapa_ocupado, GUARDIA, fila, columna, obstaculos_puestos);                
+
+        }
+        obstaculos_puestos++;    
+    }
+    
+    // HERRAMIENTAS
+    int cantidad_monedas = cantidad_baldosas_pinches / 2;
+    int cantidad_baldosa_teletransportadora = cantidad_guardia;
+    int cantidad_interruptores = cantidad_bomba;
+    nivel->tope_herramientas = cantidad_monedas + cantidad_baldosa_teletransportadora + cantidad_interruptores;
+    
+    int herramientas_puestas = 0;
+    while (herramientas_puestas <= nivel->tope_herramientas)
+    {
+        int fila = 0;
+        int columna = 0;
+        do
+        {
+            fila = rand () % dimension;
+            columna = rand () % dimension;
+        } while (mapa_ocupado[fila][columna] != VACIO); 
+        
+        // Monedas - posicion aleatoria -
+        if (herramientas_puestas < cantidad_monedas)
+        {
+            nivel->herramientas[herramientas_puestas].tipo = MONEDA;
+            nivel->herramientas[herramientas_puestas].posicion.fil = fila;
+            nivel->herramientas[herramientas_puestas].posicion.col = columna;       
+        }
+        
+        // Baldosa teletransportadora - posicion aleatoria -
+        else if(herramientas_puestas < cantidad_monedas + cantidad_baldosa_teletransportadora)
+        {
+            nivel->herramientas[herramientas_puestas].tipo = BALDOSA_TELETRANSPORTADORA;
+            nivel->herramientas[herramientas_puestas].posicion.fil = fila;
+            nivel->herramientas[herramientas_puestas].posicion.col = columna;
+        }
+
+        // Interruptor - posicion aleatoria -
+        else
+        {
+            nivel->herramientas[herramientas_puestas].tipo = INTERRUPTOR;
+            nivel->herramientas[herramientas_puestas].posicion.fil = fila;
+            nivel->herramientas[herramientas_puestas].posicion.col = columna;
+        }
+        herramientas_puestas++;
+    }

@@ -1,0 +1,10 @@
+// En archivo.h se declaran los headers de las funciones y tipos de estructuras
+// lleva al principio:
+// #ifndef __ARCHIVO_H__ 
+// #define __ARCHIVO_H__ al principio
+// lleva al final:
+// #endif
+
+
+// En archivo.c se desarrollan las funciones
+//  Debe incluir la bibleoteca "archivo.h"

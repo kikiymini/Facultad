@@ -1,0 +1,75 @@
+// En archivo.h se declaran los headers de las funciones y tipos de estructuras
+// lleva al principio:
+// #ifndef __ARCHIVO_H__ 
+// #define __ARCHIVO_H__ al principio
+// lleva al final:
+// #endif
+
+
+// En archivo.c se desarrollan las funciones
+//  Debe incluir la bibleoteca "archivo.h"
+
+
+// LEGACY
+
+void mover_personaje(char nivel[][ANCHO], int* ppY, int* ppX, char direccion)
+{
+    if (direccion == DERECHA)
+    {
+        if (nivel[*ppY][(*ppX) +1] != '#')
+        {
+            nivel[*ppY][*ppX] = ' ';
+            *ppX = *ppX +1;
+            mover_personaje(nivel, ppY, ppX, direccion);
+        }
+        else nivel[*ppY][*ppX] = 'X';
+    }
+
+    else if (direccion == IZQUIERDA)
+    {
+        if (nivel[*ppY][(*ppX) -1] != '#')
+        {
+            nivel[*ppY][*ppX] = ' ';
+            *ppX = *ppX -1;
+            mover_personaje(nivel, ppY, ppX, direccion);
+        }
+        else nivel[*ppY][*ppX] = 'X';
+    } 
+
+    else if (direccion == ARRIBA)
+    {
+        if (nivel[(*ppY) -1][*ppX] != '#')
+        {
+            nivel[*ppY][*ppX] = ' ';
+            *ppY = *ppY -1;
+            mover_personaje(nivel, ppY, ppX, direccion);
+        }
+        else nivel[*ppY][*ppX] = 'X';
+    } 
+
+    else if (direccion == ABAJO)
+    {
+        if (nivel[(*ppY) +1][*ppX] != '#')
+        {
+            nivel[*ppY][*ppX] = ' ';
+            *ppY = *ppY +1;
+            mover_personaje(nivel, ppY, ppX, direccion);
+        }
+        else nivel[*ppY][*ppX] = 'X';
+    } 
+}
+
+
+void renderizar_nivel(char nivel[][ANCHO])
+{
+    system("clear");
+    // Imprimir
+    for(int i = 0; i < ALTO; i++)
+    {
+        for(int j = 0; j < ANCHO; j++)
+        {
+            printf("%c", nivel[i][j]);
+        }
+        printf("\n");
+    } 
+}
