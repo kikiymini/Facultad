@@ -1,0 +1,37 @@
+Apunte relacionado al ejercicio:
+https://servicios.algoritmos7541mendez.com.ar/apuntes/06_-_tda.pdf
+
+Variante 3
+1. Si a nuestro TDA Lista le agregamos un puntero al último elemento, la complejidad de borrar del final será O(1).
+
+Si bien en algunos casos podria hacer que la complejidad sea de O(1), esto depende de como esten enlazados los elementos.
+En los casos en que cada elemento guarde un puntero a su anterior podemos obtener la complejidad propuesta, caso contrario
+debemos recorrer nuevamente la lista para obtener el puntero al elemento que pasara a ser el nuevo "ultimo". 
+
+2. Un TDA es un conjunto de funciones que no necesariamente están relacionadas.
+
+Un tipo de dato abstracto se caracteriza por ser una clase de objetos la cual se define por el tipo de operaciones que 
+se puede realizar sobre el mismo, si las funciones no tuvieran relacion entre si esto significaria que el tda pierde
+su unicidad.
+
+3. La complejidad de insertar en una pila es O(n).
+
+En un tda lista siempre tenemos un puntero al elemento que esta en el tope de la pila, es por esto que para insertar 
+en la pila debemos apuntar el tope de la pila actual al nuevo elemento y luego que el puntero de "tope lista" se 
+diriga a este nuevo elemento. Ambas operaciones son de O(1), por lo que la complejidad sera de O(1).
+
+Variante 4
+1. Cualquier conjunto de funciones y estructuras forman un TDA.
+
+Idem variante 3.2
+
+2. La frase Mil Ques, Un Como denota que puede haber mil cosas para hacer, pero solo una forma de implementarlo.
+
+La frase es Un que, Mil Comos; denota que el "que" referencia al concepto de caja negra de nuestro tda, ya que
+se relaciona con la funcionalidad de nuestro dato abtracto. El "como" nos habla del concepto de caja blanca, ya 
+que hay multiples maneras de cumplir con los que nos pide el contrato.
+
+3. Agregar punteros a las estructuras de mi TDA, disminuye la complejidad algorítmica.
+
+Idem variante 3.1
+

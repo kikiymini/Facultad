@@ -1,0 +1,8 @@
+No agranda una matriz que no necesita agrandarse
+ordena una matriz de una sola fila sin agrandar
+ordena una matriz de una sola fila agrandando
+el tope no supera el maximo
+elimina elementos de la fila por no poder agrandarse 
+ordena una matriz de tres filas sin agrandar
+ordena una matriz de tres filas agrandando
+todas las filas tienen la misma longitud
