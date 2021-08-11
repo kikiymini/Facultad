@@ -413,6 +413,12 @@ void pruebas_puntero_a_funcion()
 }
 // ------------------------------------
 
+void prueba_git()
+{
+  printf("Github\n");
+  return;
+}
+
 int main() {
   
   pruebas_insertar_final_y_iterador(); 
