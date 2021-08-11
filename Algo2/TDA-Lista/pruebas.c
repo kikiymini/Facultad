@@ -416,6 +416,7 @@ void pruebas_puntero_a_funcion()
 void prueba_git()
 {
   printf("Github\n");
+  printf("Hello Git\n");
   return;
 }
 
